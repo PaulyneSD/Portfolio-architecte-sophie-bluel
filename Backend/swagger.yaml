@@ -182,3 +182,4 @@ securityDefinitions:
     type: JWT
     name: Authorization
     in: header
+
