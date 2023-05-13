@@ -27,3 +27,24 @@ function displayItems(items) {
 
   });
 }
+
+function displayCategories(items) {
+  const containerDiv = document.createElement("div");
+
+  items.forEach((item) => {
+    const { id, name } = item;
+
+    const div = document.createElement("div");
+    div.classList.add("categoriesContainer");
+
+    const p = document.createElement("p");
+    p.textContent = name;
+
+    div.appendChild(p);
+    containerDiv.appendChild(div);
+  });
+
+  const portfolioSection = document.getElementById("portfolio");
+  portfolioSection.querySelector("h2").insertAdjacentElement("afterend", containerDiv);
+}
+

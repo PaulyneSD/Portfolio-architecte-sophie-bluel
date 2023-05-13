@@ -9,34 +9,48 @@ fetch("http://localhost:5678/api/categories")
     console.error("Erreur lors de la récupération des données:", error);
   });
 
-  // Afficher les différentes catégories sur la page 
-
   function displayCategories(items) {
     const containerDiv = document.createElement("div");
-    
-    const allButton = document.createElement('p')
-    allButton.textContent = "Tous";
-    containerDiv.appendChild(allButton)
+    containerDiv.classList.add("categoriesContainer");
   
-    items.forEach((item) => {
+    const allButton = document.createElement("button");
+    allButton.textContent = "Tous";
+    allButton.addEventListener("click", () => {
+      // Code à exécuter lorsque le bouton "Tous" est cliqué
+    });
+  
+    const allButtonDiv = document.createElement("div");
+    allButtonDiv.appendChild(allButton);
+    containerDiv.appendChild(allButtonDiv);
+  
+    items.forEach((item, index) => {
       const { id, name } = item;
   
-      const div = document.createElement("div");
-      div.classList.add("categoriesContainer");
+      const button = document.createElement("button");
+      button.textContent = name;
+      button.addEventListener("click", () => {
+        // Code à exécuter lorsque le bouton de catégorie est cliqué
+      });
   
-      const p = document.createElement("p");
-      p.textContent = name;
+      const buttonDiv = document.createElement("div");
+      buttonDiv.appendChild(button);
+      containerDiv.appendChild(buttonDiv);
   
-      div.appendChild(p);
-      containerDiv.appendChild(div);
+      // Ajouter des classes CSS personnalisées à chaque div de bouton
+      allButtonDiv.classList.add("all-button-div");
+      buttonDiv.classList.add("category-button-div");
+  
+      // Ajouter un ID et les styles souhaités pour le premier bouton
+      if (index === 0) {
+        allButton.id = "firstButton";
+        allButtonDiv.style.color = "white";
+      }
     });
-
-    //Placer les titres des catégories sous le H2
   
+    //Placer les boutons filtre sous le H2
     const portfolioSection = document.getElementById("portfolio");
-    portfolioSection.querySelector("h2").insertAdjacentElement("afterend", containerDiv);
+    const h2 = portfolioSection.querySelector("h2");
+    h2.insertAdjacentElement("afterend", containerDiv);
   }
-
-
   
-  
+     
